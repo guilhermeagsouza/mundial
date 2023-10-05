@@ -42,7 +42,7 @@ SUM(PRECO_TOTAL-isnull(DESCONTO,0)) AS GASTO_TOTAL
 FROM VM_INTEGRACAO.dbo.vw_propz v
 LEFT JOIN VM_DATABSP.dbo.PRODUTOS p ON v.COD_INTERNO = p.PRODUTO_ID
 LEFT JOIN [sgm].[dbo].[secao] s ON p.MERCADOLOGICO2=s.codsec AND p.MERCADOLOGICO3=s.grupo AND p.MERCADOLOGICO4=s.subgrupo
-WHERE DATA BETWEEN '2023-09-01' AND '2023-09-28' AND VALORIDENTCLIENTE IN (", paste0("'", partes[[i]], "'", collapse = ","), ")
+WHERE DATA BETWEEN '2023-09-01' AND '2023-09-30' AND VALORIDENTCLIENTE IN (", paste0("'", partes[[i]], "'", collapse = ","), ")
 GROUP BY s.secao, s.nomgrup,s.nom_sub
 ORDER BY GASTO_TOTAL DESC")
                         

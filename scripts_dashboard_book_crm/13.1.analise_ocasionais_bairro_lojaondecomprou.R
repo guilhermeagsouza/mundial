@@ -1,3 +1,5 @@
+# 13. ANÁLISE OCASIONAIS BAIRRO E LOJA ONDE MORA
+
 # 0.0 Carrega os pacotes
 pacman::p_load(odbc, DBI, tidyverse, hms, DataExplorer, writexl, magrittr, feather)
 
@@ -109,4 +111,3 @@ df_venda_ocasional_junho_setembro %>%
  )
  
  rm(list=setdiff(ls(), "con"))
- 

@@ -1,3 +1,5 @@
+# 5. TOTAL DE CUPONS E FATURAMENTO
+
 # 0.0 Carrega os pacotes
 pacman::p_load(odbc, DBI, tidyverse, hms, DataExplorer, writexl, magrittr, feather)
 

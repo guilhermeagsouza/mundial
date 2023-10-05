@@ -1,3 +1,4 @@
+# 9.2 VENDA TOTAL MEU MUNDIAL POR CATEGORIA
 # 0.0 Carrega os pacotes
 pacman::p_load(odbc, DBI, tidyverse, hms, DataExplorer, writexl, magrittr, feather)
 

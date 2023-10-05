@@ -124,5 +124,3 @@ writexl::write_xlsx(
 )
   
 rm(list=setdiff(ls(), "con"))
-
-                
