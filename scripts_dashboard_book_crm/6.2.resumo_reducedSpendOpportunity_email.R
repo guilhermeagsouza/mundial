@@ -9,7 +9,7 @@ source(
 )
 
 ############## 1. carrega arquivo
-arquivo <- read_tsv('dados/2023-9-28-export-01.3_-_Contataveis_Email-0.tsv')
+arquivo <- read_tsv('dados/2023-10-5-export-01.3_-_Contataveis_Email-0.tsv')
 
 reducedSpendOpportunity <- arquivo %>% 
   dplyr::filter(!is.na(reducedSpendOpportunity) & !reducedSpendOpportunity == '')

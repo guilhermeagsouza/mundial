@@ -1,3 +1,4 @@
+# 6.1 INTRODUCTION OPPORTUNITY EMAIL
 # 0.0 Carrega os pacotes
 pacman::p_load(odbc, DBI, tidyverse, hms, DataExplorer, writexl, magrittr, feather)
 
@@ -9,7 +10,7 @@ source(
 )
 
 ############## 1. carrega arquivos
-arquivo <- read_tsv('dados/2023-9-28-export-01.3_-_Contataveis_Email-0.tsv')
+arquivo <- read_tsv('dados/2023-10-5-export-01.3_-_Contataveis_Email-0.tsv')
 
 introductionOpportunity <- arquivo %>% 
   dplyr::filter(!is.na(introductionOpportunity) & !introductionOpportunity == '')

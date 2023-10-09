@@ -1,3 +1,4 @@
+# 7.2 REDUCED SPEND OPPORTUNITY
 # 0.0 Carrega os pacotes
 pacman::p_load(odbc, DBI, tidyverse, hms, DataExplorer, writexl, magrittr, feather)
 
@@ -9,7 +10,7 @@ source(
 )
 
 ############## 1. carrega arquivo
-arquivo <- data.table::fread('dados/2023-9-28-export-01.4_-_Contataveis_SMS-0.tsv')
+arquivo <- data.table::fread('dados/2023-10-5-export-01.4_-_Contataveis_SMS-0.tsv')
 
 reducedSpendOpportunity <- arquivo %>% 
   dplyr::filter(!is.na(reducedSpendOpportunity) & !reducedSpendOpportunity == '')

@@ -1,3 +1,4 @@
+# 6.3 RELATIONSHIP OPPORTUNITY EMAIL
 # 0.0 Carrega os pacotes
 pacman::p_load(odbc, DBI, tidyverse, hms, DataExplorer, writexl, magrittr, feather)
 
@@ -8,7 +9,7 @@ source(
   max.deparse.length=60
 )
 
-arquivo <- read_tsv('dados/2023-9-28-export-01.3_-_Contataveis_Email-0.tsv')
+arquivo <- read_tsv('dados/2023-10-5-export-01.3_-_Contataveis_Email-0.tsv')
 
 relationshipOpportunity <- arquivo %>% 
   dplyr::filter(!is.na(relationshipOpportunity) & !relationshipOpportunity == '')

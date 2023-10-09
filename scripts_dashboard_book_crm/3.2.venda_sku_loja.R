@@ -62,7 +62,9 @@ df_venda_consolidado <- df_venda_sku_loja %>%
   dplyr::left_join(cadastros_skus, by = c('COD_INTERNO')) %>% 
   dplyr::left_join(descricao_loja, by = c('LOJA'))
 
-mes_criado <- 'Agosto'
+mes_criado <- (today() - 30) %>% 
+  lubridate::month(x = ., label = TRUE, abbr = FALSE, locale = Sys.getlocale("LC_TIME")) %>% 
+  stringr::str_to_title()
 
 ## SKU e Imagem associada a ele
 df_sku_img <- DBI::dbGetQuery(

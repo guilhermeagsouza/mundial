@@ -9,7 +9,7 @@ source(
 )
 
 ############## 1. carrega arquivos
-arquivo <- data.table::fread('dados/2023-9-28-export-01.4_-_Contataveis_SMS-0.tsv')
+arquivo <- data.table::fread('dados/2023-10-5-export-01.4_-_Contataveis_SMS-0.tsv')
 
 introductionOpportunity <- arquivo %>% 
   dplyr::filter(!is.na(introductionOpportunity) & !introductionOpportunity == '')
