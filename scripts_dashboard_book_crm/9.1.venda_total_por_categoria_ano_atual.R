@@ -1,4 +1,4 @@
-# 9.1 VENDA TOTAL POR CATEGORIA ANO ATUAL
+#### 9.1 VENDA TOTAL POR CATEGORIA ANO ATUAL ####
 # 0.0 Carrega os pacotes
 pacman::p_load(odbc, DBI, tidyverse, hms, DataExplorer, writexl, magrittr, feather)
 
