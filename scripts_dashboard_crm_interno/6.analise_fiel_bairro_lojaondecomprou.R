@@ -1,5 +1,5 @@
 dados <- data.table::fread(
-  'dados/2023-9-26-export-00_-_Todos_Os_Clientes-0.csv'
+  'dados/2023-10-9-export-00_-_Todos_Os_Clientes-0.csv'
 )
 
 df_loja <- readxl::read_xlsx('dados/descricao_lojas.xlsx') %>% 
@@ -23,17 +23,20 @@ df_registro_completo %>%
   dplyr::filter(segment %in% c('Fiel') & homeDistrict !='') %>% 
   dplyr::group_by(segment) %>% 
   dplyr::count(homeDistrict) %>% 
-  dplyr::arrange(desc(n)) %>% View
+  dplyr::arrange(desc(n))
 
 ################
 # Define o número de partes em que deseja dividir os clientes fiel
-num_partes <- 12
+num_partes <- ceiling(length(clientes_fiel)/20000)
 
 # Inicializa uma lista para armazenar os data frames resultantes
 df_lista <- list()
 
 # Divide os clientes fiel em partes iguais
 partes <- split(clientes_fiel, cut(seq_along(clientes_fiel), num_partes, labels = FALSE))
+
+data_hoje <- lubridate::today()
+data_1m_antes <- lubridate::today() - 30
 
 # Start - Consulta ao Banco
 start.time <- Sys.time()
@@ -44,8 +47,8 @@ for (i in 1:num_partes) {
     conn = con,
     statement = paste0("SELECT DISTINCT DATA, NUM_CUPOM, LOJA, VALORIDENTCLIENTE 
                         FROM VM_INTEGRACAO.dbo.vw_propz v 
-                        WHERE DATA BETWEEN '2023-06-30' AND '2023-09-30' AND 
-                        VALORIDENTCLIENTE IN (", paste0("'", partes[[i]], "'", collapse = ","), ")")
+                        WHERE DATA BETWEEN '",data_1m_antes,"' AND '",data_hoje,"' AND ",
+                        "VALORIDENTCLIENTE IN (", paste0("'", partes[[i]], "'", collapse = ","), ")")
   )
   
   # Adiciona o data frame à lista
@@ -53,7 +56,7 @@ for (i in 1:num_partes) {
 }
 
 # Combina todos os data frames em um único data frame
-df_venda_fiel_junho_setembro <- do.call(rbind, df_lista)
+df_venda <- do.call(rbind, df_lista)
 
 # Tempo final - Consulta ao banco
 end.time <- Sys.time()
@@ -61,12 +64,12 @@ end.time <- Sys.time()
 
 
 writexl::write_xlsx(
-  list(clientes_fiel_cupom_identificacao = df_venda_ocasional_junho_setembro),
+  list(clientes_fiel_cupom_identificacao = df_venda),
   'output_dashboard_crm_interno/6.1.clientes_fiel_cupom_identificacao.xlsx'
 )
 
 
-df_venda_fiel_junho_setembro %>% 
+df_venda %>% 
   dplyr::rename(customerId = VALORIDENTCLIENTE) %>% 
   dplyr::left_join(df_loja, by = c('LOJA')) %>% 
   dplyr::left_join(

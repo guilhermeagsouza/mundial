@@ -1,5 +1,5 @@
 dados <- data.table::fread(
-  'dados/2023-9-26-export-00_-_Todos_Os_Clientes-0.csv'
+  'dados/2023-10-9-export-00_-_Todos_Os_Clientes-0.csv'
 )
 
 clientes_fieis <- dados %>% 
@@ -18,6 +18,9 @@ df_lista <- list()
 
 # Divide os clientes ocasionais em partes iguais
 partes <- split(clientes_fieis, cut(seq_along(clientes_fieis), num_partes, labels = FALSE))
+
+data_hoje <- lubridate::today()
+data_1m_antes <- lubridate::today() - 30
 
 # Start - Consulta ao Banco
 start.time <- Sys.time()
@@ -66,7 +69,7 @@ df_venda_mes_categoria <- DBI::dbGetQuery(
   FROM VM_INTEGRACAO.dbo.vw_propz v
   LEFT JOIN VM_DATABSP.dbo.PRODUTOS p ON v.COD_INTERNO = p.PRODUTO_ID
   LEFT JOIN [sgm].[dbo].[secao] s ON p.MERCADOLOGICO2=s.codsec AND p.MERCADOLOGICO3=s.grupo AND p.MERCADOLOGICO4=s.subgrupo
-  WHERE DATA BETWEEN '2023-09-01' AND '2023-09-28'
+  WHERE DATA BETWEEN '2023-09-01' AND '2023-09-30'
   GROUP BY s.secao, s.nomgrup,s.nom_sub,v.COD_INTERNO
   ORDER BY VENDA_LIQUIDA DESC"
   )
