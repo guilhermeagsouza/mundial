@@ -10,6 +10,9 @@ source(
   max.deparse.length=60
 )
 
+data_inicio <- '2023-01-02'
+data_hoje <- lubridate::today()
+
 df_ident_cliente_loja <-  DBI::dbGetQuery(
   conn = con, 
   statement = paste0("SELECT distinct
@@ -17,7 +20,7 @@ df_ident_cliente_loja <-  DBI::dbGetQuery(
 LOJA,
 VALORIDENTCLIENTE
 FROM VM_INTEGRACAO.dbo.vw_propz
-WHERE DATA BETWEEN '2023-01-02' AND '2023-09-25' AND TIPOIDENTCLIENTE = 1"
+WHERE DATA BETWEEN '2023-01-02' AND '2023-10-10' AND TIPOIDENTCLIENTE = 1"
   )
 )
 
@@ -55,3 +58,4 @@ writexl::write_xlsx(
   'output_dashboard_book_crm/12.analise_loja_matoso.xlsx'
 )
 
+rm(list=setdiff(ls(), "con"))

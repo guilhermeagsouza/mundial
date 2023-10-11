@@ -47,6 +47,9 @@ df_loja <- readxl::read_xlsx('dados/descricao_lojas.xlsx') %>%
  # Divide os clientes ocasionais em partes iguais
  partes <- split(clientes_ocasionais, cut(seq_along(clientes_ocasionais), num_partes, labels = FALSE))
  
+ data_hoje <- lubridate::today()
+ data_1m_antes <- lubridate::today() - 30
+ 
  # Start - Consulta ao Banco
  start.time <- Sys.time()
  
@@ -56,7 +59,7 @@ df_loja <- readxl::read_xlsx('dados/descricao_lojas.xlsx') %>%
      conn = con,
      statement = paste0("SELECT DISTINCT DATA, NUM_CUPOM, LOJA, VALORIDENTCLIENTE 
                         FROM VM_INTEGRACAO.dbo.vw_propz v 
-                        WHERE DATA BETWEEN '2023-06-26' AND '2023-09-26' AND 
+                        WHERE DATA BETWEEN '2023-07-10' AND '2023-10-10' AND 
                         VALORIDENTCLIENTE IN (", paste0("'", partes[[i]], "'", collapse = ","), ")")
    )
    
@@ -110,4 +113,4 @@ df_venda_ocasional_junho_setembro %>%
    'output_dashboard_book_crm/13.2.analise_ocasionais_bairro_loja.xlsx'
  )
  
- rm(list=setdiff(ls(), "con"))
+rm(list=setdiff(ls(), "con"))
