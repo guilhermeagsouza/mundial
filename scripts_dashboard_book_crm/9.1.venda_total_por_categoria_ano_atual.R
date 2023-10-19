@@ -9,6 +9,7 @@ source(
   max.deparse.length=60
 )
 
+# Início do processo
 start.time <- Sys.time()
 
 #### 1.1 CARREGA BASE COMPRADORES ####
@@ -91,6 +92,7 @@ df_venda_consolidada %<>%
 df_venda_consolidada %>% 
   write.csv2("output_dashboard_book_crm/11.venda_total_ano_atual.csv", sep = ",",dec = ",", row.names = FALSE)
 
+# Final do processo
 end.time <- Sys.time()
 (time.taken <- round(end.time - start.time,2))
 

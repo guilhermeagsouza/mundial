@@ -117,8 +117,6 @@ venda_consolidada <- df_venda_consolidado %>%
   dplyr::mutate_if(is.numeric, coalesce, 0) %>% 
   na.omit() %>% 
   dplyr::filter(NOME_COMPRADOR !="")
-
-venda_consolidada %>% head()
   
 writexl::write_xlsx(
   list(dash_aba2 = venda_consolidada),

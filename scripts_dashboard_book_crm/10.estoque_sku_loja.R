@@ -8,6 +8,9 @@ source(
   max.deparse.length=60
 )
 
+# Início do processo
+start.time <- Sys.time()
+
 # 1.1 Nome lojas
 df_loja <- readxl::read_xlsx('dados/descricao_lojas.xlsx') %>% 
   dplyr::mutate(LOJA = as.numeric(LOJA))
@@ -79,5 +82,9 @@ writexl::write_xlsx(
   list(estoque_loja = df_estoque_loja),
   'output_dashboard_book_crm/10.estoque_loja.xlsx'
 )
+
+# Final do processo
+end.time <- Sys.time()
+(time.taken <- round(end.time - start.time,2))
 
 rm(list=setdiff(ls(), "con"))

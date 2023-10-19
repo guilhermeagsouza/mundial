@@ -10,7 +10,7 @@ source(
 )
 
 ############## 1. carrega arquivo
-arquivo <- data.table::fread('dados/2023-10-5-export-01.4_-_Contataveis_SMS-0.tsv')
+arquivo <- data.table::fread('dados/2023-10-19-export-01.4_-_Contataveis_SMS-0.tsv')
 
 reducedSpendOpportunity <- arquivo %>% 
   dplyr::filter(!is.na(reducedSpendOpportunity) & !reducedSpendOpportunity == '')
