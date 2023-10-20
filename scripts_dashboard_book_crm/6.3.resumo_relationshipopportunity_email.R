@@ -9,7 +9,10 @@ source(
   max.deparse.length=60
 )
 
-arquivo <- read_tsv('dados/2023-10-19-export-01.3_-_Contataveis_Email-0.tsv')
+
+arquivo <- read_tsv(
+  stringr::str_c('dados/',data_atualizacao,'-export-01.3_-_Contataveis_Email-0.tsv')
+)
 
 relationshipOpportunity <- arquivo %>% 
   dplyr::filter(!is.na(relationshipOpportunity) & !relationshipOpportunity == '')
@@ -70,4 +73,4 @@ mensagem <- 'A base RELATIONSHIP OPPORTUNITY EMAIL está carregada!'
 print(mensagem)
 
 # Apaga todos os dados, com exceção da conexão com o banco
-rm(list=setdiff(ls(), "con"))
+rm(list=setdiff(ls(), c("con",'data_atualizacao')))

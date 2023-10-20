@@ -9,7 +9,9 @@ source(
 )
 
 ############## 1. carrega arquivos
-arquivo <- data.table::fread('dados/2023-10-19-export-01.4_-_Contataveis_SMS-0.tsv')
+arquivo <- data.table::fread(
+  stringr::str_c('dados/',data_atualizacao,'-export-01.4_-_Contataveis_SMS-0.tsv')
+)
 
 introductionOpportunity <- arquivo %>% 
   dplyr::filter(!is.na(introductionOpportunity) & !introductionOpportunity == '')
@@ -97,5 +99,5 @@ mensagem <- 'A base INTRODUCTION OPPORTUNITY SMS está carregada!'
 print(mensagem)
 
 # Apaga todos os dados, com exceção da conexão com o banco
-rm(list=setdiff(ls(), "con"))
+rm(list=setdiff(ls(), c("con",'data_atualizacao')))
 

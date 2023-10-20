@@ -1,5 +1,9 @@
+#Tem os seguintes atributos: segment, customerid, homedistrict, isregistercomplete
+
+list.files('dados/')
+
 dados <- data.table::fread(
-  'dados/2023-10-9-export-00_-_Todos_Os_Clientes-0.csv'
+  'dados/2023-10-20-export-00_-_Todos_Os_Clientes-0.tsv'
 )
 
 df_loja <- readxl::read_xlsx('dados/descricao_lojas.xlsx') %>% 
@@ -58,16 +62,10 @@ for (i in 1:num_partes) {
 # Combina todos os data frames em um único data frame
 df_venda <- do.call(rbind, df_lista)
 
-# Tempo final - Consulta ao banco
-end.time <- Sys.time()
-(time.taken <- round(end.time - start.time,2))
-
-
 writexl::write_xlsx(
   list(clientes_fiel_cupom_identificacao = df_venda),
   'output_dashboard_crm_interno/6.1.clientes_fiel_cupom_identificacao.xlsx'
 )
-
 
 df_venda %>% 
   dplyr::rename(customerId = VALORIDENTCLIENTE) %>% 
@@ -100,5 +98,9 @@ writexl::write_xlsx(
   list(clientes_fiel_bairro_loja = df_consolidado),
   'output_dashboard_crm_interno/6.2.analise_fiel_bairro_loja.xlsx'
 )
+
+# Tempo final - Consulta ao banco
+end.time <- Sys.time()
+(time.taken <- round(end.time - start.time,2))
 
 rm(list=setdiff(ls(), "con"))

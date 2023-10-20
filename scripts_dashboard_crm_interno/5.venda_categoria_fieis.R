@@ -1,5 +1,7 @@
+list.files('dados/')
+
 dados <- data.table::fread(
-  'dados/2023-10-9-export-00_-_Todos_Os_Clientes-0.csv'
+  'dados/2023-10-20-export-00_-_Todos_Os_Clientes-0.tsv'
 )
 
 clientes_fieis <- dados %>% 

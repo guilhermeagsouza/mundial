@@ -8,6 +8,16 @@ source(
   max.deparse.length=60
 )
 
+# Carrega os 6 códigos
+data_atualizacao <- '2023-10-19'
+
+source('scripts_dashboard_book_crm/6.1.resumo_introductionOpportunity_email.R')
+source('scripts_dashboard_book_crm/6.2.resumo_reducedSpendOpportunity_email.R')
+source('scripts_dashboard_book_crm/6.3.resumo_relationshipopportunity_email.R')
+source('scripts_dashboard_book_crm/7.1.resumo_introductionOpportunity_sms.R')
+source('scripts_dashboard_book_crm/7.2.resumo_reducedSpendOpportunity_sms.R')
+source('scripts_dashboard_book_crm/7.3.resumo_relationshipopportunity_sms.R')
+
 email_introduction <- readxl::read_xlsx('output_dashboard_book_crm/6.1.output_introductionOpportunity_email.xlsx') %>% 
   dplyr::mutate(tipo_contato = 'email') %>% 
   dplyr::rename(n_email = n)

@@ -1,5 +1,8 @@
 # 12.MIGRAÇÃO CLIENTES MATOSO
 
+# Início do código
+start.time <- Sys.time()
+
 # 0.0 Carrega os pacotes
 pacman::p_load(odbc, DBI, tidyverse, hms, DataExplorer, writexl, magrittr, feather)
 
@@ -20,7 +23,7 @@ df_ident_cliente_loja <-  DBI::dbGetQuery(
 LOJA,
 VALORIDENTCLIENTE
 FROM VM_INTEGRACAO.dbo.vw_propz
-WHERE DATA BETWEEN '2023-01-02' AND '2023-10-10' AND TIPOIDENTCLIENTE = 1"
+WHERE DATA BETWEEN '2023-01-02' AND '2023-10-19' AND TIPOIDENTCLIENTE = 1"
   )
 )
 
@@ -57,5 +60,9 @@ writexl::write_xlsx(
   list(analise_matoso = df_consolidada),
   'output_dashboard_book_crm/12.analise_loja_matoso.xlsx'
 )
+
+# Final do código
+end.time <- Sys.time()
+(time.taken <- round(end.time - start.time,2))
 
 rm(list=setdiff(ls(), "con"))
